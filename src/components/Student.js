@@ -17,7 +17,7 @@ class Student extends React.Component{
       score: this.state.score +1
     },()=>{
       if(this.state.score >=350){
-        this.setState({success:true})
+        this.setState({success:true, failure:false})
       }
     })
   }
@@ -26,27 +26,22 @@ class Student extends React.Component{
       score:this.state.score -1
     },()=>{
       if(this.state.score <=340){
-        this.setState({failure:true})
+        this.setState({failure:true, success:false})
       }
     })
   }
   render(){
     const isSuccess = this.state.success;
+    const isFail = this.state.failure;
     let text;
     if(isSuccess){
       text = <span>success</span>
     }
-    else{
-      text = ""
-    }
-    
-    const isFail = this.state.failure;
-    let textFail;
-    if(isFail){
-      textFail = <span id="fail">Fail</span>
+    else if(isFail){
+      text = <span id="fail">Fail</span>
     }
     else{
-      textFail = ""
+      text = "";
     }
     return(
       <div className="student">
@@ -56,7 +51,7 @@ class Student extends React.Component{
         <button onClick={() => this.subScore()} className="subBtn">-</button>
         </h2>
         <p className="universityName">{this.props.university}
-        {text}{textFail}
+        {text}
         </p>
        </div>
        <div className="right">
